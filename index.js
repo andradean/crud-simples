@@ -43,7 +43,17 @@ const server = http.createServer((req, res) => {
       res.end(resposta);
       console.log(resposta);
     });
+  } else if (urlParse.pathname == "remover-usuario") {
+    fs.unlink("database/" + params.id + ".txt", function (err) {
+      console.log("file deleted");
+
+      resposta = "usuario removido";
+      res.statusCode = 204;
+      res.setHeader("Content-Type", "application/json");
+      res.end(resposta);
+    });
   }
+
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   res.end("hello world");
